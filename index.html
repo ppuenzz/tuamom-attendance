@@ -1,1 +1,123 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ลงชื่อเข้างาน</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sriracha&family=Prompt&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Prompt', sans-serif;
+      background: linear-gradient(135deg, #fceabb, #f8b500);
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      animation: fadeIn 1.5s ease-in;
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .form-container {
+      background: white;
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+    h1 {
+      font-family: 'Sriracha', cursive;
+      font-size: 2.2em;
+      margin-bottom: 10px;
+      color: #f57f17;
+    }
+    #clock {
+      font-size: 1.2em;
+      color: #666;
+      margin-bottom: 20px;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 12px 0;
+      border: 2px solid #ffd54f;
+      border-radius: 10px;
+      font-size: 1em;
+      transition: 0.3s;
+    }
+    input:focus {
+      border-color: #fbc02d;
+      outline: none;
+      box-shadow: 0 0 8px rgba(251, 192, 45, 0.6);
+    }
+    button {
+      background: linear-gradient(to right, #ffb74d, #f57c00);
+      color: white;
+      border: none;
+      padding: 14px 24px;
+      font-size: 1em;
+      border-radius: 25px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: 0.3s ease;
+    }
+    button:hover {
+      background: linear-gradient(to right, #f57c00, #ef6c00);
+      transform: scale(1.05);
+    }
+    #status {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #33691e;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>ลงชื่อเข้างาน 💫</h1>
+    <div id="clock"></div>
+    <form id="attend-form">
+      <input name="name" placeholder="ชื่อ-นามสกุล" required />
+      <button type="submit">📥 ส่งข้อมูล</button>
+    </form>
+    <p id="status"></p>
+  </div>
 
+  <script>
+    const form = document.getElementById('attend-form');
+    const statusText = document.getElementById('status');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const data = new FormData(form);
+
+      fetch('https://script.google.com/macros/s/AKfycbyn3LgnGj7PDqkYBSHAwZlRv-05zAh80zjGH9lptAQRSLmfMqmD6meKJUvuvC-1nA_1Pg/exec', {
+        method: 'POST',
+        body: data
+      }).then(res => res.text()).then(txt => {
+        statusText.textContent = '✅ บันทึกแล้ว ขอบคุณค่ะ!';
+        statusText.style.color = '#2e7d32';
+        form.reset();
+      }).catch(() => {
+        statusText.textContent = '❌ ส่งไม่สำเร็จ กรุณาลองใหม่';
+        statusText.style.color = '#c62828';
+      });
+    });
+
+    // นาฬิกาเรียลไทม์
+    function updateClock() {
+      const now = new Date();
+      const options = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+      document.getElementById('clock').textContent = '🕒 เวลา: ' + now.toLocaleTimeString('th-TH', options);
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
+</body>
+</html>
