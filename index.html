@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ระบบเช็กชื่อเข้างาน</title>
+  <title>ลงชื่อเข้างาน</title>
   <link href="https://fonts.googleapis.com/css2?family=Sriracha&family=Prompt&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; }
@@ -84,7 +84,6 @@
     <div id="clock"></div>
     <form id="attend-form">
       <input name="name" placeholder="ชื่อ-นามสกุล" required />
-      <input name="phone" placeholder="เบอร์โทร" required />
       <button type="submit">📥 ส่งข้อมูล</button>
     </form>
     <p id="status"></p>
@@ -102,7 +101,7 @@
         method: 'POST',
         body: data
       }).then(res => res.text()).then(txt => {
-        statusText.textContent = '✅ ส่งข้อมูลเรียบร้อยแล้ว ขอบคุณค่ะ!';
+        statusText.textContent = '✅ บันทึกแล้ว ขอบคุณค่ะ!';
         statusText.style.color = '#2e7d32';
         form.reset();
       }).catch(() => {
