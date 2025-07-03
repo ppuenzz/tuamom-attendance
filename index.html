@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ลงชื่อเข้างาน</title>
+  <title>Attendnace</title>
   <link href="https://fonts.googleapis.com/css2?family=Sriracha&family=Prompt&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; }
@@ -80,11 +80,11 @@
 </head>
 <body>
   <div class="form-container">
-    <h1>ลงชื่อเข้างาน 💫</h1>
+    <h1>Attendnace 🥟</h1>
     <div id="clock"></div>
     <form id="attend-form">
-      <input name="name" placeholder="ชื่อ-นามสกุล" required />
-      <button type="submit">📥 ส่งข้อมูล</button>
+      <input name="name" placeholder="Your name" required />
+      <button type="submit">📥 Submit</button>
     </form>
     <p id="status"></p>
   </div>
@@ -101,11 +101,11 @@
         method: 'POST',
         body: data
       }).then(res => res.text()).then(txt => {
-        statusText.textContent = '✅ บันทึกแล้ว ขอบคุณค่ะ!';
+        statusText.textContent = '✅ Success!';
         statusText.style.color = '#2e7d32';
         form.reset();
       }).catch(() => {
-        statusText.textContent = '❌ ส่งไม่สำเร็จ กรุณาลองใหม่';
+        statusText.textContent = '❌ Try again';
         statusText.style.color = '#c62828';
       });
     });
@@ -114,7 +114,7 @@
     function updateClock() {
       const now = new Date();
       const options = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
-      document.getElementById('clock').textContent = '🕒 เวลา: ' + now.toLocaleTimeString('th-TH', options);
+      document.getElementById('clock').textContent = '🕒 TIME: ' + now.toLocaleTimeString('au-AU', options);
     }
     setInterval(updateClock, 1000);
     updateClock();
